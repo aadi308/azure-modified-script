@@ -9,10 +9,10 @@ enable_notifications() {
     # JSON payload
     json_payload='{
         "properties": {
-            "emails": "",
+            "emails": "admin@contoso.com;admin2@contoso.com",
             "notificationsByRole": {
                 "state": "On",
-                "roles": ["Owner"]
+                "roles": ["AccountAdmin", "Owner"]
             },
             "alertNotifications": {
                 "state": "On",

@@ -16,7 +16,7 @@ enable_notifications() {
             },
             "alertNotifications": {
                 "state": "On",
-                "minimalSeverity": "Medium"
+                "minimalSeverity": "High"
             },
             "phone": ""
         }

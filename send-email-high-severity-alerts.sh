@@ -44,3 +44,7 @@ enable_email_notifications "$subscription" "$access_token" "$email"
 
 # Record the action in CSV
 echo "$subscription,Enabled" >> "$OUTPUT_CSV"
+
+
+#How to run script
+# ./<file_name> <subscription_id> <email_address>
