@@ -3,7 +3,7 @@
 # Create empty arrays
 rg=()
 sql_servers=()
-storage_accounts=()
+sa=()
 
 OUTPUT_CSV="updated_sql_servers_audit_retention.csv"
 subscription="$1"
@@ -31,12 +31,12 @@ for arg in "$@"; do
         in_array1=true
         in_array2=false
         in_array3=false
-    elif [ "$arg" == "--sql-server" ]; then
+    elif [ "$arg" == "--sql_servers" ]; then
         # Switch to adding elements to array2
         in_array1=false
         in_array2=true
         in_array3=false
-    elif [ "$arg" == "--storage-account" ]; then
+    elif [ "$arg" == "--sa" ]; then
         # Switch to adding elements to array3
         in_array1=false
         in_array2=false
@@ -48,7 +48,7 @@ for arg in "$@"; do
         elif [ "$in_array2" == true ]; then
             sql_servers+=("$arg")
         elif [ "$in_array3" == true ]; then
-            storage_accounts+=("$arg")
+            sa+=("$arg")
         fi
     fi
 done
@@ -69,7 +69,7 @@ for ((i=0; i<${#sql_servers[@]}; i++)); do
         continue
     fi
 
-    storage_account_name=${storage_accounts[$i]}
+    storage_account_name=${sa[$i]}
 
     if [ -z "$storage_account_name" ]; then
         echo "Storage account name not provided. Skipping..."

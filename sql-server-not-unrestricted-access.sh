@@ -24,15 +24,12 @@ shift
 # Loop through the remaining command-line arguments
 for arg in "$@"; do
     if [ "$arg" == "--rg" ]; then
-        # Switch to adding elements to array1
         in_array1=true
         in_array2=false
-    elif [ "$arg" == "*" ]; then
-        # Switch to adding elements to array2
+    elif [ "$arg" == "--sql_servers" ]; then
         in_array1=false
         in_array2=true
     else
-        # Add the argument to the appropriate array
         if [ "$in_array1" == true ]; then
             rg+=("$arg")
         elif [ "$in_array2" == true ]; then
@@ -44,16 +41,10 @@ done
 # Loop through each resource group and SQL server
 for ((i=0; i<${#sql_servers[@]}; i++)); do
     resource_group=${rg[$i]}
-
-    if [ -z "$resource_group" ]; then
-        echo "Resource group not provided for SQL Server. Skipping..."
-        continue
-    fi
-
     sql_server_name=${sql_servers[$i]}
 
-    if [ -z "$sql_server_name" ]; then
-        echo "SQL Server name not provided. Skipping..."
+    if [ -z "$resource_group" ] || [ -z "$sql_server_name" ]; then
+        echo "Resource group or SQL Server name not provided. Skipping..."
         continue
     fi
 
